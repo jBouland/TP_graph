@@ -19,16 +19,16 @@ import java.util.logging.Logger;
  */
 public class Engine {
     
-     public ArrayList<String> importFile(String Path) {
+     public ArrayList<Mot> importFile(String Path) {
         
-        ArrayList<String> list = new ArrayList();
+        ArrayList<Mot> list = new ArrayList();
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(Path));
             String line = br.readLine();
 
             while (line != null) {
-                list.add(line);
+                list.add(new Mot(line));
                 line = br.readLine();
             }
         } catch (FileNotFoundException ex) {
