@@ -15,6 +15,7 @@ public class Mot {
 
     private String valeur;
     private ArrayList<Mot> listeVoisins;
+    public Boolean visite = false;
 
     public Mot(String valeur) {
         this.valeur = valeur;
@@ -46,6 +47,15 @@ public class Mot {
             return true;
         }
         return false;
+    }
+    
+    public void parcoursComposanteConnexe(){
+        
+        this.visite=true;        
+        for(int i=0;i<listeVoisins.size();i++){
+            if(!listeVoisins.get(i).visite)
+            listeVoisins.get(i).parcoursComposanteConnexe();
+        }
     }
 
 }
