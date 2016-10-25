@@ -10,7 +10,9 @@ public class Mot {
 
     private String valeur;
     private ArrayList<Mot> listeVoisins;
-    public Boolean visite = false;
+    public Boolean visite_connexe = false;
+    public Boolean visite_connexe_2 = false;
+    public Boolean visite_diametre = false;
 
     public Mot(String valeur) {
         this.valeur = valeur;
@@ -24,16 +26,14 @@ public class Mot {
     public void addVoisin(Mot m) {
         this.listeVoisins.add(m);
     }
-    
-    public int getNumberOfVoisins(){
+
+    public int getNumberOfVoisins() {
         return listeVoisins.size();
     }
 
     public ArrayList<Mot> getListeVoisins() {
         return listeVoisins;
     }
-    
-    
 
     public boolean testLien(Mot m) {
         int numberDiff = 0;
@@ -53,14 +53,34 @@ public class Mot {
         }
         return false;
     }
-    
-    public void parcoursComposanteConnexe(){
-        
-        this.visite=true;        
-        for(int i=0;i<listeVoisins.size();i++){
-            if(!listeVoisins.get(i).visite)
-            listeVoisins.get(i).parcoursComposanteConnexe();
+
+    public ArrayList<Mot> parcoursComposanteConnexe() {
+        ArrayList a = new ArrayList();
+        this.visite_connexe = true;
+        for (int i = 0; i < listeVoisins.size(); i++) {
+            if (!listeVoisins.get(i).visite_connexe) {
+                a.addAll(listeVoisins.get(i).parcoursComposanteConnexe());
+            }
         }
+        a.add(this);
+        return a;
+    }
+   
+
+
+    public int parcoursDiametre(int indice) {
+        int memoire = indice;
+        int tempo;
+        this.visite_diametre = true;
+        for (int i = 0; i < listeVoisins.size(); i++) {
+            if (!listeVoisins.get(i).visite_diametre) {
+                tempo = listeVoisins.get(i).parcoursDiametre(indice + 1);
+                if (tempo > memoire) {
+                    memoire = tempo;
+                }
+            }
+        }
+        return memoire;
     }
 
 }
