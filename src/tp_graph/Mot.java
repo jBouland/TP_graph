@@ -18,6 +18,7 @@ public class Mot {
 
     public Mot(String valeur) {
         this.valeur = valeur;
+        this.listeVoisins = new ArrayList();
     }
 
     public String getValeur() {
