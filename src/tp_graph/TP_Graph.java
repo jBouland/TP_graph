@@ -55,16 +55,21 @@ public class TP_Graph {
         }
         System.out.println("Debut Algo");
         int nbcomposanteconnexe = 0;
+        ArrayList<ArrayList<Mot>> composanteconnexes = new ArrayList<ArrayList<Mot>>();
         for (int i = 0; i < listResult.size(); i++) {
-            System.out.println("Boucle : " + i);
             m = (Mot) listResult.get(i);
-            if (!m.visite) {
-                m.parcoursComposanteConnexe();
+            if (!m.visite_connexe) {
+                composanteconnexes.add(m.parcoursComposanteConnexe());
                 nbcomposanteconnexe++;
                 System.out.println("composante connexe : " + nbcomposanteconnexe);
             }
         }
         System.out.println("Nombre de composantes connexe : " + nbcomposanteconnexe);
-
+        
+        for(int i=0; i<composanteconnexes.size();i++){
+            composanteconnexes.get(i);
+            
+        }
+        
     }
 }
