@@ -20,9 +20,20 @@ public class TP_Graph {
      */
     public static void main(String[] args) {
         Engine e = new Engine();
+        Mot m;
         String filePath = new File("").getAbsolutePath();
-        filePath = filePath.concat("\\mots04lettres.txt");
+        filePath = filePath.concat("\\mots10lettres.txt"); 
         System.out.println(filePath);
         ArrayList listResult = e.importFile(filePath);
+        
+        for(int i=0; i<listResult.size(); i++){
+            m = (Mot)listResult.get(i);
+            for(int j=i+1; j<listResult.size(); j++){
+                if(m.testLien((Mot)listResult.get(j))){
+                    //Pour voir les liens se faire, décommentez la ligne ci-dessous : 
+                   // System.out.println(m.getValeur() + " proche de " + ((Mot)listResult.get(j)).getValeur());
+                }
+            }
+        }   
     }
 }
