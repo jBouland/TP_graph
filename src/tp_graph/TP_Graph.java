@@ -7,6 +7,9 @@ package tp_graph;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -19,6 +22,9 @@ public class TP_Graph {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("");
+        System.out.println("***Projet Doublets - Bouland Joris & Cabrelli Tommy ***");
+        System.out.println("");
         int nbLiens = 0;
         int nbMotsSansVoisins = 0;
         int nbComposantes1voisin = 0;
@@ -28,7 +34,6 @@ public class TP_Graph {
         Mot m;
         String filePath = new File("").getAbsolutePath();
         filePath = filePath.concat("\\mots04lettres.txt");
-        System.out.println(filePath);
         ArrayList listResult = e.importFile(filePath);
         //Nombre de sommets : 
         System.out.println("Nombre de sommets : " + listResult.size());
@@ -75,6 +80,12 @@ public class TP_Graph {
         }
         System.out.println("Nombre de composantes connexe : " + nbcomposanteconnexe);
         System.out.println("Au maximum : " + listeNbSommetParNbVoisins.lastEntry().getValue() + " sommet(s) avec " + listeNbSommetParNbVoisins.lastKey() + " voisin(s)." );
-         
+        Set set = listeNbSommetParNbVoisins.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();
+            System.out.print("Il y a "+ mentry.getValue() + " sommet(s) avec ");
+            System.out.println(mentry.getKey() + " voisin(s)");
+        }
     }
 }
