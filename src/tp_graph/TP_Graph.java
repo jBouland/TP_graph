@@ -7,6 +7,7 @@ package tp_graph;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 /**
  *
@@ -20,7 +21,9 @@ public class TP_Graph {
     public static void main(String[] args) {
         int nbLiens = 0;
         int nbMotsSansVoisins = 0;
+        int nbComposantes1voisin = 0;
         ArrayList<Mot> listMot1Voisin = new ArrayList();
+        TreeMap<Integer, Integer> listeNbSommetParNbVoisins = new TreeMap();
         Engine e = new Engine();
         Mot m;
         String filePath = new File("").getAbsolutePath();
@@ -39,10 +42,18 @@ public class TP_Graph {
                     nbLiens++;
                 }
             }
-            if (m.getNumberOfVoisins() == 0) {
+            //On regarde le nombre de voisin du mot
+            int numVoisins = m.getNumberOfVoisins();
+            if (numVoisins == 0) {
                 nbMotsSansVoisins++;
-            } else if (m.getNumberOfVoisins() == 1) {
+            } else if (numVoisins == 1) {
                 listMot1Voisin.add(m);
+            }
+            if(listeNbSommetParNbVoisins.containsKey(numVoisins)){
+                int old = listeNbSommetParNbVoisins.get(numVoisins);
+                listeNbSommetParNbVoisins.put(numVoisins, ++old);
+            } else {
+                listeNbSommetParNbVoisins.put(numVoisins, 1);
             }
         }
         System.out.println("Nombre d'arêtes : " + nbLiens);
@@ -50,21 +61,20 @@ public class TP_Graph {
         //Question 5 - On vérifie si les voisins des mots avec un seul voisin ont aussi un seul voisin
         for (int i = 0; i < listMot1Voisin.size(); i++) {
             if (listMot1Voisin.get(i).getListeVoisins().get(0).getNumberOfVoisins() == 1) {
-
+                nbComposantes1voisin++;
             }
         }
-        System.out.println("Debut Algo");
+        System.out.println("Nombre de composantes composées uniquement de deux mots : " + nbComposantes1voisin);
         int nbcomposanteconnexe = 0;
         for (int i = 0; i < listResult.size(); i++) {
-            System.out.println("Boucle : " + i);
             m = (Mot) listResult.get(i);
             if (!m.visite) {
                 m.parcoursComposanteConnexe();
                 nbcomposanteconnexe++;
-                System.out.println("composante connexe : " + nbcomposanteconnexe);
             }
         }
         System.out.println("Nombre de composantes connexe : " + nbcomposanteconnexe);
-
+        System.out.println("Au maximum : " + listeNbSommetParNbVoisins.lastEntry().getValue() + " sommet(s) avec " + listeNbSommetParNbVoisins.lastKey() + " voisin(s)." );
+         
     }
 }
