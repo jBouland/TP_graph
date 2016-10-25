@@ -66,6 +66,9 @@ public class Mot {
         return a;
     }
    
+    public int distance(Mot m){
+        return 1;
+    }
 
 
     public int parcoursDiametre(int indice) {
