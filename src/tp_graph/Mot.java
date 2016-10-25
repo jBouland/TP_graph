@@ -20,6 +20,10 @@ public class Mot {
         this.valeur = valeur;
         this.listeVoisins = new ArrayList();
     }
+    
+    public int getNumberOfVoisins(){
+        return listeVoisins.size();
+    }
 
     public String getValeur() {
         return valeur;
@@ -28,6 +32,11 @@ public class Mot {
     public void addVoisin(Mot m) {
         this.listeVoisins.add(m);
     }
+
+    public ArrayList<Mot> getListeVoisins() {
+        return listeVoisins;
+    }
+    
 
     public boolean testLien(Mot m) {
         int numberDiff = 0;
